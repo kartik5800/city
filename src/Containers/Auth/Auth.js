@@ -11,6 +11,7 @@ function Auth(props) {
     const handleSignup = () => {
 
     }
+    
     return (
         <section id="appointment" className="appointment d-flex">
             <div className="container">
