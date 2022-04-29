@@ -30,7 +30,7 @@ function Header(props) {
             <ul>
               <li>
                 {/* <a className="nav-link scrollto" href="index.html">Home</a> */}
-                <NavLink exact to={"/"} className="nav-link scrollto active">Home</NavLink>
+                <NavLink exact to={"/"} className="nav-link scrollto">Home</NavLink>
               </li>
               <li>
                 {/* <a className="nav-link scrollto" href="./pages/departments.html">Departments</a> */}
@@ -55,10 +55,12 @@ function Header(props) {
           {/* <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
             Appointment</a> */}
 
-            <NavLink exact to={"/Make_Appointment "} className="appointment-btn scrollto">Make an V</NavLink>
+          <NavLink exact to={"/Make_Appointment "} className="appointment-btn scrollto">Make an appointment</NavLink>
+
+
           <a href="#" className="appointment-btn scrollto">
             {/* <span className="d-none d-md-inline">Login/ Signup</span> */}
-            <NavLink exact to={"/Login"} className="d-none d-md-inline">Login</NavLink>
+            <NavLink exact to={"/Auth"} className="d-none d-md-inline">Login/Signup</NavLink>
           </a>
         </div>
       </header>
