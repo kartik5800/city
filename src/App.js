@@ -12,11 +12,13 @@ import Contact from './Containers/Contact/Contact';
 
 import Make_Appointment from './Containers/Make_Appointment/Make_Appointment';
 import Auth from './Containers/Auth/Auth';
+import Counter from './Containers/Counter/Counter';
 
 function App() {
   return (
     <div>
        <Header />
+       <Counter />
        <Switch>
          <Route exact path={"/"} component={Home} />
          <Route exact path={"/Departments"} component={Departments} />
@@ -25,8 +27,10 @@ function App() {
          <Route exact path={"/Contact"} component={Contact} />
          <Route exact path={"/Auth"} component={Auth} />
          <Route exact path={"/Make_Appointment"} component={Make_Appointment} />
+       
        </Switch>
        <Footer />
+         
     </div>
   );
 }
