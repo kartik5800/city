@@ -29,37 +29,34 @@ function Header(props) {
           <nav id="navbar" className="navbar order-last order-lg-0">
             <ul>
               <li>
-                {/* <a className="nav-link scrollto" href="index.html">Home</a> */}
                 <NavLink exact to={"/"} className="nav-link scrollto">Home</NavLink>
               </li>
               <li>
-                {/* <a className="nav-link scrollto" href="./pages/departments.html">Departments</a> */}
                 <NavLink exact to={"/Departments"} className="nav-link scrollto">Departments</NavLink>
               </li>
               <li>
-                {/* <a className="nav-link scrollto" href="./pages/doctors.html">Doctors</a> */}
                 <NavLink exact to={"/Doctors"} className="nav-link scrollto">Doctors</NavLink>
               </li>
               <li>
-                {/* <a className="nav-link scrollto " href="./pages/about.html">About</a> */}
                 <NavLink exact to={"/About"} className="nav-link scrollto ">About</NavLink>
 
               </li>
               <li>
-                {/* <a className="nav-link scrollto" href="./pages/contact.html">Contact</a> */}
+                <NavLink exact to={"/Medicine"} className="nav-link scrollto ">Medicine</NavLink>
+
+              </li>
+              <li>
                 <NavLink exact to={"/Contact"} className="nav-link scrollto">Contact</NavLink>
               </li>
             </ul>
             <i className="bi bi-list mobile-nav-toggle" />
           </nav>
-          {/* <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
-            Appointment</a> */}
+          
 
           <NavLink exact to={"/Make_Appointment "} className="appointment-btn scrollto">Make an appointment</NavLink>
 
 
           <a href="#" className="appointment-btn scrollto">
-            {/* <span className="d-none d-md-inline">Login/ Signup</span> */}
             <NavLink exact to={"/Auth"} className="d-none d-md-inline">Login/Signup</NavLink>
           </a>
         </div>
