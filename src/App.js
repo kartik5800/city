@@ -19,7 +19,7 @@ function App() {
   return (
     <div>
        <Header />
-       <Counter />
+       {/* <Counter /> */}
        <Switch>
          <Route exact path={"/"} component={Home} />
          <Route exact path={"/Departments"} component={Departments} />
