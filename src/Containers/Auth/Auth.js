@@ -137,6 +137,7 @@ function Auth(props) {
                                 <span>Already have Account</span><button onClick={() => setUserType('Login')}>Login</button>
                             </div>
                     }
+
                             </div>
                         </form>
                     </formik>
@@ -149,5 +150,9 @@ function Auth(props) {
         </section >
     );
 }
+
+
+
+
 
 export default Auth;
