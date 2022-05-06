@@ -6,11 +6,13 @@ function Auth(props) {
     const [userType, setUserType] = useState('Login')
     const [reset, setReset] = useState(false)
 
-    const handletLogin = () => {
+    const handletLogin = (values) => {
+        alert(JSON.stringify(values, null, 2));
 
     }
 
-    const handleSignup = () => {
+    const handleSignup = (values) => {
+        alert(JSON.stringify(values, null, 2));
 
     }
 
@@ -20,20 +22,20 @@ function Auth(props) {
     }
 
     let signup_set = {
-        name: yup.string().required('please enter name'),
+        name: yup.string().required('please enter your name'),
         email: yup.string().required('enter email').email('enter valid email'),
         password: yup.string().required('please enter password'),
     }
 
 
     let schema, initVal;
-    if (userType === "login") {
+    if (userType === "Login") {
         schema = yup.object().shape(login_set);
         initVal = {
             email: '',
             password: ''
         }
-    } else if (userType === "signup") {
+    } else if (userType === "Signup") {
         schema = yup.object().shape(signup_set);
         initVal = {
             name: '',
@@ -46,7 +48,12 @@ function Auth(props) {
         initialValues: initVal,
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
-            alert(JSON.stringify(values, null, 2));
+            if (userType === "Login") {
+                handletLogin(values)
+
+            } else if (userType === "Signup") {
+                handleSignup(values)
+            }
             resetForm();
         }
     })
@@ -65,8 +72,8 @@ function Auth(props) {
                     }
                 </div>
                 <div className='php-email-form'>
-                    <formik value={formik}>
-                        <form onSubmit={formik.handleSubmit}>
+                    <Formik value={formik}>
+                        <Form onSubmit={formik.handleSubmit}>
                             <div className='row align-items-center justify-content-center'>
                                 {
                                     userType === 'Login' ? null
@@ -80,8 +87,14 @@ function Auth(props) {
                                                 placeholder="Your Name"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.name}
+                                                onBlur={formik.handleBlur}
+
                                             />
-                                            <p>{formik.values.name}</p>
+
+                                            {
+                                                formik.errors.name && formik.touched.name ? <p>{formik.errors.name}</p> : ''
+                                            }
+
                                             <div className="validate" />
                                         </div>
                                 }
@@ -94,9 +107,15 @@ function Auth(props) {
                                         className="form-control"
                                         name="email"
                                         id="email"
+                                        placeholder="Your Email"
                                         onChange={formik.handleChange}
-                                        value={formik.values.email} />
-                                        <p>{formik.values.email}</p>
+                                        value={formik.values.email}
+                                        onBlur={formik.handleBlur}
+                                    />
+                                    {
+                                        formik.errors.email && formik.touched.email ? <p>{formik.errors.email}</p> : ''
+                                    }
+
                                     <div className="validate" />
                                 </div>
                                 <div className="col-md-7 form-group mt-3 mt-md-0">
@@ -108,39 +127,43 @@ function Auth(props) {
                                         placeholder="Your Password"
                                         onChange={formik.handleChange}
                                         value={formik.values.password}
+                                        onBlur={formik.handleBlur}
                                     />
-                                    <p>{formik.values.password}</p>
+                                    {
+                                        formik.errors.password && formik.touched.password ? <p>{formik.errors.password}</p> : ''
+                                    }
+
                                     <div className="validate" />
                                 </div>
-                                <div className="col-md-7 form-group mt-3 mt-md-0">
+                                {/* <div className="col-md-7 form-group mt-3 mt-md-0">
                                     <input type="submit" className="form-control" name="submit" id="submit" />
                                     <div className="validate" />
 
-                                </div>
+                                </div> */}
                                 {
-                        userType === 'Login' ?
-                            <div className='text-center buttons'>
-                                <button type='submit'>login</button>
-                            </div>
-                            :
-                            <div className='text-center'>
-                                <button type='submit'>Login</button>
-                            </div>
-                    }
-                    {
-                        userType === 'Login' ?
-                            <div className='text-center buttons'>
-                                <span>Create New Account</span><button onClick={() => setUserType('Signup')}>Signup</button>
-                            </div>
-                            :
-                            <div className='text-center'>
-                                <span>Already have Account</span><button onClick={() => setUserType('Login')}>Login</button>
-                            </div>
-                    }
+                                    userType === 'Login' ?
+                                        <div className='text-center buttons'>
+                                            <button type='submit'>login</button>
+                                        </div>
+                                        :
+                                        <div className='text-center'>
+                                            <button type='submit'>Signup</button>
+                                        </div>
+                                }
+                                {
+                                    userType === 'Login' ?
+                                        <div className='text-center buttons'>
+                                            <span>Create New Account</span><a onClick={() => setUserType('Signup')}>Signup</a>
+                                        </div>
+                                        :
+                                        <div className='text-center'>
+                                            <span>Already have Account</span><a onClick={() => setUserType('Login')}>Login</a>
+                                        </div>
+                                }
 
                             </div>
-                        </form>
-                    </formik>
+                        </Form>
+                    </Formik>
                     <div>
                     </div>
                 </div>
