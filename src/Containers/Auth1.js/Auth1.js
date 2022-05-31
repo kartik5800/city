@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 
-function Auth(props) {
+function Auth1(props) {
     const [userType, setUserType] = useState('Login')
     const [reset, setReset] = useState(false)
 
@@ -12,14 +12,18 @@ function Auth(props) {
     }
 
     const handleSignup = (values) => {
-        let data = JSON.parse(localStorage.getItem("users"));
-        console.log(data);
+        alert(JSON.stringify(values, null, 2));
+
+        let data = JSON.parse(localStorage.getItem("users"))
+        // data.push(values)
+        // console.log(data);
+        // localStorage.setItem("users",JSON.stringify([values]))
 
         if (data === null) {
-            localStorage.setItem("users", JSON.stringify([values]))
+            localStorage.setItem("users",JSON.stringify([values]))
         } else {
-            data.push(values);
-            localStorage.setItem("users", JSON.stringify(data))
+            data.push(values)
+            localStorage.setItem("users",JSON.stringify(data))
         }
 
     }
@@ -125,7 +129,7 @@ function Auth(props) {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        name="email"
+                                        name="email" 
                                         id="email"
                                         placeholder="Your Email"
                                         onChange={formik.handleChange}
@@ -182,12 +186,12 @@ function Auth(props) {
                                         userType === 'Login' ?
                                             <div className='text-center mt-5'>
                                                 <span>create a New account</span>
-                                                <a style={{color: "red"}} onClick={() => { setUserType('Signup') }} >     signup</a> <br></br>
+                                                <a onClick={() => { setUserType('Signup') }} >     signup</a> <br></br>
                                                 <a className='mt-3' onClick={() => { setReset(true) }}>Forget password</a>
                                             </div> :
                                             <div className='text-center mt-5'>
                                                 <span>already have an account ?</span>
-                                                <a style={{color: "red"}} onClick={() => { setUserType('Login') }} >    Login</a>
+                                                <a onClick={() => { setUserType('Login') }} >    Login</a>
                                             </div>
                                 }
                             </div>
@@ -207,4 +211,4 @@ function Auth(props) {
 
 
 
-export default Auth;
+export default Auth1;
