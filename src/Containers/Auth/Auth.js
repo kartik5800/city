@@ -7,7 +7,15 @@ function Auth(props) {
     const [reset, setReset] = useState(false)
 
     const handletLogin = (values) => {
-        alert(JSON.stringify(values, null, 2));
+        // alert(JSON.stringify(values, null, 2));
+        let data=JSON.parse(localStorage.getItem("users"))
+        if (data === null) {
+            localStorage.setItem("users", JSON.stringify([values]))
+        } else {
+            data.push(values)
+            localStorage.setItem("users", JSON.stringify(data))
+        }
+        sessionStorage.setItem("users" , "123456")
 
     }
 
@@ -21,6 +29,7 @@ function Auth(props) {
             data.push(values);
             localStorage.setItem("users", JSON.stringify(data))
         }
+       
 
     }
     const handlepassword = (values) => {
