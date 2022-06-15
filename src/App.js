@@ -15,6 +15,7 @@ import Counter from './Containers/Counter/Counter';
 import Medicine from './Containers/Medicine/Medicine';
 import PublicRoute from './Containers/Route/PublicRoute';
 import PrivetRoute from './Containers/Route/PrivetRoute';
+import ListAppointment from './Containers/Make_Appointment/ListAppointment';
 
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
          <PublicRoute exact path={"/Contact"} component={Contact} />
          <PrivetRoute exact path={"/Medicine"} component={Medicine} />
          <PublicRoute restricted={true} exact path={"/Auth"} component={Auth} />
-         <Route exact path={"/Make_Appointment"} component={Make_Appointment} />
+         < PrivetRoute exact path={"/Make_Appointment"} component={Make_Appointment} />
+         < PrivetRoute exact path={"/ListAppointment"} component={ListAppointment} />
 
        
        </Switch>
