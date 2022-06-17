@@ -1,9 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Form } from 'reactstrap';
+import { boolean } from 'yup';
 import InputBox from '../../Components/InputBox/InputBox';
+import * as yup from 'yup';
+import { Form, Formik, useFormik } from 'formik';
 
-function Make_Appointment(props) {
+function Appointment(props) {
   let Make_Appointment = {
     name: yup.string().required('enter name'),
     email: yup.string().required('please enter email'),
@@ -29,6 +31,8 @@ function Make_Appointment(props) {
     },
   });
 
+  const{handleChange ,errors ,handleSubmit} = formik;
+
 
   return (
     <section id="appointment" className="appointment">
@@ -48,7 +52,7 @@ function Make_Appointment(props) {
           </div>
         </div>
         <Formik value={formik}>
-          <Form action method="post" role="form" className="php-email-form" onSubmit={formik.handleSubmit}>
+          <Form onSubmit={handleSubmit}  className="php-email-form">
             <div className="row">
               <div className="col-md-4 form-group">
                 <InputBox
@@ -57,6 +61,9 @@ function Make_Appointment(props) {
                   className="form-control"
                   id="name"
                   placeholder="Your Name"
+                  errors={Boolean(errors.name)}
+                  errormessage = {errors.name}
+                  onchange={handleChange}
                 />
                 <div className="validate" />
               </div>
@@ -67,8 +74,10 @@ function Make_Appointment(props) {
                   name="email"
                   id="email"
                   placeholder="Your Email"
-                  data-rule="email"
-                  data-msg="Please enter a valid email" />
+                  errors={Boolean(errors.email)}
+                  errormessage = {errors.email}
+                  onchange={handleChange}
+                  />
                 <div className="validate" />
               </div>
               <div className="col-md-4 form-group mt-3 mt-md-0">
@@ -78,8 +87,9 @@ function Make_Appointment(props) {
                   name="phone"
                   id="phone"
                   placeholder="Your Phone"
-                  onChange={formik.handleChange}
-                  error={error.phone}
+                  errors={Boolean(errors.phone)}
+                  errormessage = {errors.phone}
+                  onchange={handleChange}
                 />
                 <div className="validate" />
               </div>
@@ -92,8 +102,10 @@ function Make_Appointment(props) {
                   className="form-control datepicker"
                   id="date"
                   placeholder="Appointment Date"
-                  data-rule="minlen:4"
-                  data-msg="Please enter at least 4 chars" />
+                  errors={Boolean(errors.date)}
+                  errormessage = {errors.date}
+                  onchange={handleChange}
+                  />
                 <div className="validate" />
               </div>
               <div className="col-md-4 form-group mt-3">
@@ -117,7 +129,7 @@ function Make_Appointment(props) {
             </div>
             <div className="mb-3">
               <div className="loading">Loading</div>
-              <div className="error-message" />
+              <div className="errors-message" />
               <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
             </div>
             <div className="text-center"><button type="submit">Make an Appointment</button></div>
@@ -129,4 +141,4 @@ function Make_Appointment(props) {
   );
 }
 
-export default Make_Appointment;
+export default Appointment;

@@ -53,7 +53,7 @@ function Header(props) {
           </nav>
           
           <a href="#" className="appointment-btn scrollto">
-          <NavLink exact to={"/Make_Appointment"}>Make an appointment</NavLink>
+          <NavLink exact to={"/Appointment"}>Make an appointment</NavLink>
           </a>
           
 

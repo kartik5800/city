@@ -9,13 +9,13 @@ import Departments from "./Containers/Departments/Departments";
 import Doctors from './Containers/Doctors/Doctors';
 import About from './Containers/About/About';
 import Contact from './Containers/Contact/Contact';
-import Make_Appointment from './Containers/Make_Appointment/Make_Appointment';
 import Auth from './Containers/Auth/Auth';
-import Counter from './Containers/Counter/Counter';
+// import Counter from './Containers/Counter/Counter';
 import Medicine from './Containers/Medicine/Medicine';
 import PublicRoute from './Containers/Route/PublicRoute';
 import PrivetRoute from './Containers/Route/PrivetRoute';
 import ListAppointment from './Containers/Make_Appointment/ListAppointment';
+import Appointment from './Containers/Make_Appointment/Appointment';
 
 function App() {
   return (
@@ -30,7 +30,8 @@ function App() {
          <PublicRoute exact path={"/Contact"} component={Contact} />
          <PrivetRoute exact path={"/Medicine"} component={Medicine} />
          <PublicRoute restricted={true} exact path={"/Auth"} component={Auth} />
-         < PrivetRoute exact path={"/Make_Appointment"} component={Make_Appointment} />
+         {/* <PublicRoute exact path={"/Appointment"} component={Appointment} /> */}
+         < PrivetRoute  path={"/Appointment"} component={Appointment} />
          < PrivetRoute exact path={"/ListAppointment"} component={ListAppointment} />
 
        
