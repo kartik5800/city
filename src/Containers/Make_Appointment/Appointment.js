@@ -1,13 +1,14 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { boolean } from "yup";
+// import {form} from 'reactstrap'
 import InputBox from "../../Components/InputBox/InputBox";
 import * as yup from "yup";
 import { Form, Formik, useFormik } from "formik";
 
 function Appointment(props) {
 
-  const historydata= useHistory();
+  const historydata = useHistory();
   let Make_Appointment = {
     name: yup.string().required("enter name"),
     email: yup.string().required("please enter email"),
@@ -34,38 +35,41 @@ function Appointment(props) {
     onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
 
-      const  {
+      const {
         name,
-         email,
-         phone,
-         date,
-         department
-       }=values
-       
-       
-         const apt={
-           // id:Math.floor(math.random() * 1000),
-           name,
-           email,
-           phone,
-           date,
-           department
-         }
-       
-       
-         let bookdata = JSON.parse(localStorage.getItem(Appointment));
-       
-       if (bookdata === null) {
-       localStorage.setItem("Appointment", JSON.stringify({apt}));
-       }else{
-         bookdata.push(apt)
-         localStorage.setItem("Appointment", JSON.stringify(bookdata));
-       }
-       
-       historydata.push("/")
-       
+        email,
+        phone,
+        date,
+        department
+      } = values
+
+
+      const apt = {
+        id: Math.floor(Math.random() * 1000),
+        name,
+        email,
+        phone,
+        date,
+        department
+      }
+
+
+      let bookdata = JSON.parse(localStorage.getItem("Appointment"));
+
+      if (bookdata === null) {
+        localStorage.setItem("Appointment", JSON.stringify([apt]));
+      } else {
+        bookdata.push(apt)
+        localStorage.setItem("Appointment", JSON.stringify(bookdata));
+      }
+
+
+      historydata.push("/ListAppointment");
+
     },
+
   });
+
 
 
 
@@ -88,7 +92,7 @@ function Appointment(props) {
         </div>
         <div className="row text-center">
           <div className="col-6">
-            <NavLink activeClassName="aptnav" to={"/Make_Appointment"}>
+            <NavLink activeClassName="aptnav" to={"/Appointment"}>
               Make_Appointment
             </NavLink>
           </div>
