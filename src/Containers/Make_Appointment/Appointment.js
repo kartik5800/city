@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { boolean } from "yup";
 // import {form} from 'reactstrap'
@@ -7,8 +7,10 @@ import * as yup from "yup";
 import { Form, Formik, useFormik } from "formik";
 
 function Appointment(props) {
+  const [update, setUpdate] = useState(false);
 
   const historydata = useHistory();
+
   let Make_Appointment = {
     name: yup.string().required("enter name"),
     email: yup.string().required("please enter email"),
@@ -40,7 +42,8 @@ function Appointment(props) {
         email,
         phone,
         date,
-        department
+        department,
+        message
       } = values
 
 
@@ -50,7 +53,8 @@ function Appointment(props) {
         email,
         phone,
         date,
-        department
+        department,
+        message
       }
 
 
@@ -75,7 +79,23 @@ function Appointment(props) {
 
 
 
-  const { handleChange, errors, handleBlur, handleSubmit, touched } = formik;
+  const { handleChange, errors, handleBlur, handleSubmit, touched, values } = formik;
+
+  useEffect(
+    () => {
+
+      let dData = JSON.parse(localStorage.getItem("Appointment"));
+      // console.log(dData);
+      console.log(props.location.state);
+      if (dData !== null && props.location.state) {
+        let filterdata = dData.filter((d) => d.id === props.location.state.id);
+
+        console.log(filterdata);
+        formik.setValues(filterdata[0])
+      }
+    },
+    [])
+
 
   return (
     <section id="appointment" className="appointment">
@@ -111,6 +131,7 @@ function Appointment(props) {
                   name="name"
                   className="form-control"
                   id="name"
+                  value={values.name}
                   placeholder="Your Name"
                   errors={Boolean(errors.name && touched.name)}
                   errormessage={errors.name}
@@ -125,6 +146,7 @@ function Appointment(props) {
                   className="form-control"
                   name="email"
                   id="email"
+                  value={values.email}
                   placeholder="Your Email"
                   errors={Boolean(errors.email && touched.email)}
                   errormessage={errors.email}
@@ -139,6 +161,7 @@ function Appointment(props) {
                   className="form-control"
                   name="phone"
                   id="phone"
+                  value={values.phone}
                   placeholder="Your Phone"
                   errors={Boolean(errors.phone && touched.phone)}
                   errormessage={errors.phone}
@@ -155,6 +178,7 @@ function Appointment(props) {
                   name="date"
                   className="form-control datepicker"
                   id="date"
+                  value={values.date}
                   placeholder="Appointment Date"
                   errors={Boolean(errors.date && touched.date)}
                   errormessage={errors.date}
@@ -168,6 +192,7 @@ function Appointment(props) {
                   type="select"
                   name="department"
                   id="department"
+                  value={values.department}
                   className="form-select"
                   errors={Boolean(errors.department && touched.department)}
                   errormessage={errors.department}
@@ -190,6 +215,7 @@ function Appointment(props) {
                 rows={5}
                 placeholder="Message (Optional)"
                 defaultValue={""}
+                value={values.message}
                 errors={Boolean(errors.message && touched.message)}
                 errormessage={errors.message}
                 onChange={handleChange}

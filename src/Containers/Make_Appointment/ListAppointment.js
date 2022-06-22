@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 function ListAppointment(props) {
 
   const [data, setData] = useState([])
+  const historydata = useHistory();
 
   const showData = () => {
     let localData = JSON.parse(localStorage.getItem("Appointment"));
@@ -23,8 +24,8 @@ function ListAppointment(props) {
 
   }
 
-  const handleEdit = () => {
-    
+  const handleEdit = (id) => {
+    historydata.push("/Appointment" , {"id" : id});
   }
 
   useEffect(() => {
@@ -59,7 +60,7 @@ function ListAppointment(props) {
                 <h6 key={i}>{d.phone}</h6>
                 <h6 key={i}>{d.date}</h6>
                 <button onClick={(() =>handleDelete(d.id))} > delete</button>
-                <button onClick={(() =>handleEdit())} > Edit</button>
+                <button onClick={(() =>handleEdit(d.id))} > Edit</button>
               </>
             )
           })
