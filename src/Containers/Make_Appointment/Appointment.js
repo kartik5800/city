@@ -20,6 +20,25 @@ function Appointment(props) {
     message: yup.string().required("please enter message"),
   };
 
+
+  const handleUpdate = (udata) => {
+
+   let datalocal= JSON.parse(localStorage.getItem("Appointment"));
+  let finaldata = datalocal.map((d) => {
+    if (d.id === udata.id){
+      return udata;
+    }else{
+      return d;
+    }
+  })
+  localStorage.setItem("Appointment", JSON.stringify(finaldata));
+  historydata.push("ListAppointment")
+  formik.resetForm();
+  setUpdate(false);
+
+  }
+
+
   let schema = yup.object().shape(Make_Appointment);
   const formik = useFormik({
     initialValues: {
@@ -35,6 +54,11 @@ function Appointment(props) {
 
     validationSchema: schema,
     onSubmit: (values) => {
+
+      if (update) {
+        handleUpdate(values)
+        
+      }else{
       // alert(JSON.stringify(values, null, 2));
 
       const {
@@ -69,8 +93,11 @@ function Appointment(props) {
 
 
       historydata.push("/ListAppointment");
+     
+      
+    }
 
-    },
+  }
 
   });
 
@@ -92,8 +119,10 @@ function Appointment(props) {
 
         console.log(filterdata);
         formik.setValues(filterdata[0])
+        setUpdate(true)
       }
     },
+  
     [])
 
 
@@ -231,7 +260,13 @@ function Appointment(props) {
               </div>
             </div>
             <div className="text-center">
-              <button type="submit">Make an Appointment</button>
+              {
+                update ? 
+                  <button type="submit" > Update</button>
+                :
+                <button type="submit">Make an Appointment</button> 
+              }
+              
             </div>
           </Form>
         </Formik>
