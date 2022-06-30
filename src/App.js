@@ -16,13 +16,17 @@ import PublicRoute from './Containers/Route/PublicRoute';
 import PrivetRoute from './Containers/Route/PrivetRoute';
 import ListAppointment from './Containers/Make_Appointment/ListAppointment';
 import Appointment from './Containers/Make_Appointment/Appointment';
+import { ConfigureStore } from "./redux/Store";
+import { Provider } from "react-redux";
+import Counter from "./Containers/Counter/Counter";
 
 function App() {
+  const store= ConfigureStore ()
   return (
-    <div>
-       <Header />
-       {/* <Counter /> */}
-       <Switch>
+    <>
+<Provider store={store}>
+      <Header />
+      <Switch>
          <PublicRoute exact path={"/"} component={Home} />
          <PublicRoute exact path={"/Departments"} component={Departments} />
          <PublicRoute exact path={"/Doctors"} component={Doctors} />
@@ -33,12 +37,12 @@ function App() {
          {/* <PublicRoute exact path={"/Appointment"} component={Appointment} /> */}
          < PrivetRoute  path={"/Appointment"} component={Appointment} />
          < PrivetRoute exact path={"/ListAppointment"} component={ListAppointment} />
-
-       
-       </Switch>
-       <Footer />
-         
-    </div>
+         <Route exact path={"/Counter"} component={Counter} />
+         </Switch>
+      <Footer />
+      </Provider>
+    
+    </>
   );
 }
 
