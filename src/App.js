@@ -19,29 +19,32 @@ import Appointment from './Containers/Make_Appointment/Appointment';
 import { ConfigureStore } from "./redux/Store";
 import { Provider } from "react-redux";
 import Counter from "./Containers/Counter/Counter";
+import { ThemeProvider } from './Contex/ThemeContex';
 
 function App() {
-  const store= ConfigureStore ()
+  const store = ConfigureStore()
   return (
     <>
-<Provider store={store}>
-      <Header />
-      <Switch>
-         <PublicRoute exact path={"/"} component={Home} />
-         <PublicRoute exact path={"/Departments"} component={Departments} />
-         <PublicRoute exact path={"/Doctors"} component={Doctors} />
-         <PublicRoute exact path={"/About"} component={About} />
-         <PublicRoute exact path={"/Contact"} component={Contact} />
-         <PrivetRoute exact path={"/Medicine"} component={Medicine} />
-         <PublicRoute restricted={true} exact path={"/Auth"} component={Auth} />
-         {/* <PublicRoute exact path={"/Appointment"} component={Appointment} /> */}
-         < PrivetRoute  path={"/Appointment"} component={Appointment} />
-         < PrivetRoute exact path={"/ListAppointment"} component={ListAppointment} />
-         <Route exact path={"/Counter"} component={Counter} />
-         </Switch>
-      <Footer />
-      </Provider>
-    
+      <ThemeProvider>
+        <Provider store={store}>
+          <Header />
+          <Switch>
+            <Route exact path={"/"} component={Home} />
+            <Route exact path={"/Departments"} component={Departments} />
+            <Route exact path={"/Doctors"} component={Doctors} />
+            <Route exact path={"/About"} component={About} />
+            <Route exact path={"/Contact"} component={Contact} />
+            <Route exact path={"/Medicine"} component={Medicine} />
+            <Route restricted={true} exact path={"/Auth"} component={Auth} />
+            {/* <PublicRoute exact path={"/Appointment"} component={Appointment} /> */}
+            < Route path={"/Appointment"} component={Appointment} />
+            < Route exact path={"/ListAppointment"} component={ListAppointment} />
+            <Route exact path={"/Counter"} component={Counter} />
+          </Switch>
+          <Footer />
+        </Provider>
+      </ThemeProvider>
+
     </>
   );
 }

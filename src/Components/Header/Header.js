@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import ThemeContex from '../../Contex/ThemeContex';
 
 function Header(props) {
+  const theme = useContext(ThemeContex)
+  console.log(theme);
+
   return (
     <div className="main-header">
-      <div id="topbar" className="d-flex align-items-center fixed-top">
-        <div className="container d-flex justify-content-between">
+      <div id="topbar" className={`d-flex align-items-center fixed-top ${theme.theme}`}>
+        <div className="container d-flex justify-content-betwee`n">
           <div className="contact-info d-flex align-items-center">
             <i className="bi bi-envelope" /> <a href="mailto:contact@example.com">cityhospital@example.com</a>
             <i className="bi bi-phone" /> +91 9988776655
           </div>
+          <button onClick={() => {theme.toogle_theme(theme.theme)}}>change theme</button>          
           <div className="d-none d-lg-flex social-links align-items-center">
             <a href="#" className="twitter"><i className="bi bi-twitter" /></a>
             <a href="#" className="facebook"><i className="bi bi-facebook" /></a>
@@ -55,11 +60,11 @@ function Header(props) {
             </ul>
             <i className="bi bi-list mobile-nav-toggle" />
           </nav>
-          
+
           <a href="#" className="appointment-btn scrollto">
-          <NavLink exact to={"/Appointment"}>Make an appointment</NavLink>
+            <NavLink exact to={"/Appointment"}>Make an appointment</NavLink>
           </a>
-          
+
 
           <a href="#" className="appointment-btn scrollto">
             <NavLink exact to={"/Auth"} className="d-none d-md-inline">Login/Signup</NavLink>
